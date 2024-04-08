@@ -12,9 +12,13 @@ import {
   StyleSheet, Text, View,
 } from 'react-native';
 import CategoryScreen from './screens/CategoryScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MealsOverViewScreen from './screens/MealsOverViewScreen';
 
-
+const Stack = createNativeStackNavigator();
 const App = (): React.JSX.Element =>  {
+ 
   return (
     <SafeAreaView style={styles.container}>
     <StatusBar
@@ -25,8 +29,12 @@ const App = (): React.JSX.Element =>  {
       hidden={false}
     />
    <View style={styles.container}>
-    <Text>Hello World!!</Text>
-    <CategoryScreen/>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen name="MealCategories" component={CategoryScreen} />
+      <Stack.Screen name="MealsOverView" component={MealsOverViewScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
    </View>
    </SafeAreaView>
   );
