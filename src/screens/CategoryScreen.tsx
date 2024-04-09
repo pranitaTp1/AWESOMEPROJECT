@@ -4,10 +4,11 @@ import CategoryGridTitle from "../components/CategoryGridTitle";
 
 const CategoryScreen = ({navigation}) => {
 
-    const pressHandler = () => {
-        navigation.navigate('MealsOverView');
-    };
+   
     const renderCategoryItem = ({ item }) => {
+        const pressHandler = () => {
+            navigation.navigate('MealsOverView',{categoryId:item?.id});
+        };
         return <CategoryGridTitle name={item?.name} color={item?.color} onPress={pressHandler} />
     };
 
