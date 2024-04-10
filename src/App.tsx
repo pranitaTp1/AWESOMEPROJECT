@@ -30,8 +30,8 @@ const App = (): React.JSX.Element =>  {
     />
    <View style={styles.container}>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="MealCategories" component={CategoryScreen} />
+      <Stack.Navigator screenOptions={{headerStyle:{backgroundColor:'#351401'},headerTintColor:'white',contentStyle:{backgroundColor:'#3f2f25'}}}>
+      <Stack.Screen name="MealCategories" component={CategoryScreen} options={{title:'All Categories'}}/>
       <Stack.Screen name="MealsOverView" component={MealsOverViewScreen} />
       </Stack.Navigator>
     </NavigationContainer>
