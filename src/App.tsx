@@ -22,9 +22,10 @@ const App = (): React.JSX.Element =>  {
   return (
     <SafeAreaView style={styles.container}>
     <StatusBar
+
       animated={true}
       backgroundColor="#61dafb"
-      barStyle={"dark-content"}
+      barStyle={"light-content"}
       showHideTransition={"slide"}
       hidden={false}
     />
