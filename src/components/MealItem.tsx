@@ -1,26 +1,32 @@
+import { useNavigation } from "@react-navigation/native"
 import { Image, Pressable, StyleSheet, Text, View } from "react-native"
+import MealDetail from "./MealDetail";
 
 type MealItemProps = {
+    id:string,
     title:string,
     imageUrl: string,
     duration:number,
     complexity: string,
-    affordability: string
+    affordability: string,
+    navigation:any;
 
 }
 
-const MealItem = ({title,imageUrl,duration,complexity,affordability}:MealItemProps) => {
+const MealItem = ({id, title,imageUrl,duration,complexity,affordability,navigation}:MealItemProps) => {
+
+    const selectMealHandler = () => {
+        navigation.navigate("MealsDetailsScreen",{mealId:id});
+    };
+    
+
     return <View style={styles.mealItem}>
-        <Pressable>
+        <Pressable onPress={selectMealHandler}>
             <View>
                 <Image source={{uri:imageUrl}} style={styles.image}/>
                 <Text style={styles.title}>{title}</Text>
             </View>
-            <View style={styles.details}>
-                <Text style={styles.details}>{duration}</Text>
-                <Text style={styles.details}>{complexity.toUpperCase()}</Text>
-                <Text style={styles.details}>{affordability.toUpperCase()}</Text>
-            </View>
+            <MealDetail duration={duration} complexity={complexity} affordability={affordability}/>
         </Pressable>
         </View>
 }

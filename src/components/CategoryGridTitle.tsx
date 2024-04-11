@@ -1,4 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 type props = {
     name: string,
@@ -7,7 +6,6 @@ type props = {
 }
 
 const CategoryGridTitle = ({ name, color, onPress }: props) => {
-    const navigation = useNavigation();
     return <View style={[styles.grid, { backgroundColor: color }]}>
         <Pressable style={styles.button} onPress={onPress}>
             <View style={styles.innerContainer}>
