@@ -1,13 +1,23 @@
-import { Image, StyleSheet, Text, View } from "react-native"
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native"
 import { MEALS } from "../data/dummy-data";
 import MealDetail from "../components/MealDetail";
 import SubTitle from "../components/MealDetail/SubTitle";
 import List from "../components/MealDetail/List";
+import IconButton from "../components/IconButton";
+import { useLayoutEffect } from "react";
 
 const MealsDetailsScreen = ({ route, navigation }) => {
     const mealId = route.params.mealId;
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
-    return <View>
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight:()=>{
+                return <IconButton />
+            }
+        });
+    },[navigation])
+
+    return <ScrollView style={styles.rootContainer}><View>
         <Image source={{ uri: selectedMeal?.imageUrl }} style={styles.image}></Image>
         <Text style={styles.title}>{selectedMeal?.title}</Text>
         {selectedMeal &&
@@ -16,11 +26,16 @@ const MealsDetailsScreen = ({ route, navigation }) => {
                 complexity={selectedMeal?.complexity}
                 affordability={selectedMeal?.affordability}
                 txtStyle={styles.details} />}
+                <View style={styles.listOuterContainer}>
+        <View style={styles.listContainer}>
         <SubTitle>Intgredients:</SubTitle>
         <List data={selectedMeal?.ingredients}></List>
         <SubTitle>Steps:</SubTitle>
         <List data={selectedMeal?.steps}></List>
+        </View>
+        </View>
     </View>
+    </ScrollView>
 };
 const styles = StyleSheet.create({
     image: {
@@ -49,5 +64,14 @@ const styles = StyleSheet.create({
         fontSize: 18,
         padding: 16
     },
+    listContainer:{
+        width:'80%'
+    },
+    listOuterContainer:{
+        alignItems:'center'
+    },
+    rootContainer:{
+        marginBottom:32
+    }
 });
 export default MealsDetailsScreen;
