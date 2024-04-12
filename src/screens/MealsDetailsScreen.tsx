@@ -5,14 +5,18 @@ import SubTitle from "../components/MealDetail/SubTitle";
 import List from "../components/MealDetail/List";
 import IconButton from "../components/IconButton";
 import { useLayoutEffect } from "react";
+import { Alert } from "react-native";
 
 const MealsDetailsScreen = ({ route, navigation }) => {
     const mealId = route.params.mealId;
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+
+    const handlePressHandler = () => (Alert.alert('sdsd'));
+
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight:()=>{
-                return <IconButton />
+                return <IconButton onPress={handlePressHandler} icon={"favorite"} color={"white"}/>
             }
         });
     },[navigation])
