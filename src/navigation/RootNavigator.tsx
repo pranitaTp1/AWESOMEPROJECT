@@ -19,7 +19,7 @@ const RootNavigator = () => {
             />
             <Stack.Screen name="MealCategories" component={CategoryScreen} options={{ title: 'All Categories' }} />
             <Stack.Screen name="MealsOverView" component={MealsOverViewScreen} />
-            <Stack.Screen name="MealsDetailsScreen" component={MealsDetailsScreen} />
+            <Stack.Screen name="MealsDetailsScreen" component={MealsDetailsScreen} options={{ title: 'About the meal' }}/>
         </Stack.Navigator>
     </NavigationContainer>
 }
