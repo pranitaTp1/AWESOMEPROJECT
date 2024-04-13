@@ -5,21 +5,31 @@ import SubTitle from "../components/MealDetail/SubTitle";
 import List from "../components/MealDetail/List";
 import IconButton from "../components/IconButton";
 import { useLayoutEffect } from "react";
-import { Alert } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/redux/favorites";
 
 const MealsDetailsScreen = ({ route, navigation }) => {
     const mealId = route.params.mealId;
     const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+    const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids);
+    const dispatch = useDispatch();
+    const mealIsFavorite = favoriteMealIds.includes(mealId);
 
-    const handlePressHandler = () => (Alert.alert('sdsd'));
+    const handlePressHandler = () => {
+        if (mealIsFavorite) {
+            dispatch(removeFavorite({ id: mealId }));
+        } else {
+            dispatch(addFavorite({ id: mealId }));
+        }
+    };
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            headerRight:()=>{
-                return <IconButton onPress={handlePressHandler} icon={"favorite"} color={"white"}/>
+            headerRight: () => {
+                return <IconButton onPress={handlePressHandler} icon={mealIsFavorite ? "favorite" : 'favorite-outline'} color={"white"} />
             }
         });
-    },[navigation])
+    }, [navigation, mealIsFavorite])
 
     return <ScrollView style={styles.rootContainer}><View>
         <Image source={{ uri: selectedMeal?.imageUrl }} style={styles.image}></Image>
@@ -30,13 +40,13 @@ const MealsDetailsScreen = ({ route, navigation }) => {
                 complexity={selectedMeal?.complexity}
                 affordability={selectedMeal?.affordability}
                 txtStyle={styles.details} />}
-                <View style={styles.listOuterContainer}>
-        <View style={styles.listContainer}>
-        <SubTitle>Intgredients:</SubTitle>
-        <List data={selectedMeal?.ingredients}></List>
-        <SubTitle>Steps:</SubTitle>
-        <List data={selectedMeal?.steps}></List>
-        </View>
+        <View style={styles.listOuterContainer}>
+            <View style={styles.listContainer}>
+                <SubTitle>Intgredients:</SubTitle>
+                <List data={selectedMeal?.ingredients}></List>
+                <SubTitle>Steps:</SubTitle>
+                <List data={selectedMeal?.steps}></List>
+            </View>
         </View>
     </View>
     </ScrollView>
@@ -68,14 +78,14 @@ const styles = StyleSheet.create({
         fontSize: 18,
         padding: 16
     },
-    listContainer:{
-        width:'80%'
+    listContainer: {
+        width: '80%'
     },
-    listOuterContainer:{
-        alignItems:'center'
+    listOuterContainer: {
+        alignItems: 'center'
     },
-    rootContainer:{
-        marginBottom:32
+    rootContainer: {
+        marginBottom: 32
     }
 });
 export default MealsDetailsScreen;

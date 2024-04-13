@@ -14,6 +14,8 @@ import {
 
 import 'react-native-gesture-handler';
 import RootNavigator from './navigation/RootNavigator';
+import { Provider } from 'react-redux';
+import { store } from './store/redux/store';
 
 const App = (): React.JSX.Element => {
   return (
@@ -26,7 +28,9 @@ const App = (): React.JSX.Element => {
         hidden={false}
       />
       <View style={styles.container}>
+        <Provider store={store}>
         <RootNavigator />
+        </Provider>
       </View>
     </SafeAreaView>
   );

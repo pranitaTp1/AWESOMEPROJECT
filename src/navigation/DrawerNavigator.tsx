@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import CategoryScreen from "../screens/CategoryScreen";
 import FavoritesScreen from "../screens/FavoritesScreen";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const Drawer = createDrawerNavigator();
 const DrawerNavigator = () => {
@@ -21,9 +22,13 @@ const DrawerNavigator = () => {
                 component={CategoryScreen}
                 options={{
                     title: 'All Categories',
+                    drawerIcon:({color,size}) => <MaterialIcons name="list" color={color} size={size} />
                 }}
             />
-            <Drawer.Screen name="Favorites" component={FavoritesScreen} />
+            <Drawer.Screen name="Favorites" component={FavoritesScreen}  
+                options={{
+                    drawerIcon:({color,size}) => <MaterialIcons name="star" color={color} size={size} />
+                }}/>
         </Drawer.Navigator>
     );
 }

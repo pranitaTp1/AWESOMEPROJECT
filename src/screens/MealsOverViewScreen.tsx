@@ -1,9 +1,9 @@
 import { Alert, FlatList, StyleSheet, Text, View } from "react-native"
 import { CATEGORIES, MEALS } from "../data/dummy-data";
-import MealItem from "../components/MealItem";
+import MealItem from "../components/MealList/MealItem";
 import { useLayoutEffect } from "react";
 
-const MealsOverViewScreen = ({ route,navigation }) => {
+const MealsOverViewScreen = ({ route, navigation }) => {
 
     const categoryId = route?.params?.categoryId;
 
@@ -16,8 +16,8 @@ const MealsOverViewScreen = ({ route,navigation }) => {
         navigation.setOptions({
             title: categoryTitle
         })
-    
-    },[navigation,categoryId]);
+
+    }, [navigation, categoryId]);
 
     const renderMealItem = ({ item }) => {
         const mealItemProps = {
@@ -26,7 +26,7 @@ const MealsOverViewScreen = ({ route,navigation }) => {
             duration: item?.duration,
             complexity: item?.complexity,
             affordability: item?.affordability,
-            id:item?.id
+            id: item?.id
         }
         return <MealItem {...mealItemProps} navigation={navigation} />
     };
@@ -39,9 +39,9 @@ const MealsOverViewScreen = ({ route,navigation }) => {
     </View>
 }
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        padding:16
+    container: {
+        flex: 1,
+        padding: 16
     }
 
 });
